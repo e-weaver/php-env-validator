@@ -1,0 +1,23 @@
+{
+    "name": "eweavertech/php-env-validator",
+    "description": "A lightweight CLI tool to validate and synchronize your .env files with .env.example",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "eWeaver",
+            "email": "hello@eweaver.in"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Eweaver\\EnvValidator\\": "src/"
+        }
+    },
+    "bin": [
+        "env-validate"
+    ]
+}

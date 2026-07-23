@@ -1,0 +1,39 @@
+#!/usr/bin/env php
+<?php
+
+// Find the autoloader depending on whether we are developing or installed via Composer
+$autoloadFiles = [
+    __DIR__ . '/vendor/autoload.php',
+    __DIR__ . '/../../autoload.php',
+];
+
+$autoloaderFound = false;
+foreach ($autoloadFiles as $file) {
+    if (file_exists($file)) {
+        require $file;
+        $autoloaderFound = true;
+        break;
+    }
+}
+
+if (!$autoloaderFound) {
+    // Fallback for local testing without composer installed
+    $localClassPath = __DIR__ . '/src/EnvValidator.php';
+    if (file_exists($localClassPath)) {
+        require_once $localClassPath;
+    } else {
+        echo "Error: Autoloader not found. Please run 'composer install' first.\n";
+        exit(1);
+    }
+}
+
+use Eweaver\EnvValidator\EnvValidator;
+
+// Support running from a different directory
+$envFile = getcwd() . '/.env';
+$exampleFile = getcwd() . '/.env.example';
+
+$validator = new EnvValidator($envFile, $exampleFile);
+$exitCode = $validator->run();
+
+exit($exitCode);
