@@ -7,7 +7,8 @@ If your team frequently updates `.env.example` with new keys, this tool will hel
 ## Features
 
 - **Zero Dependencies**: Pure PHP, no bloated vendor folders.
-- **Interactive Prompts**: If keys are missing, the tool will ask you to provide a value and automatically append it to your `.env` file.
+- **Bulk or Interactive Prompts**: If keys are missing, the tool gives you the option to instantly append all missing keys as empty variables, or to be prompted one-by-one to provide values.
+- **Smart Generation**: If you are missing an `.env.example` file, the tool can automatically generate a secure one for you by stripping the secrets from your existing `.env` file. If both are missing, it can initialize them for you.
 - **CI/CD Friendly**: Run validation checks during your deployment or as a Git pre-commit hook.
 
 ## Installation
