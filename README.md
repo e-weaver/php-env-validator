@@ -15,7 +15,7 @@ If your team frequently updates `.env.example` with new keys, this tool will hel
 Install globally or locally in your project via Composer:
 
 ```bash
-composer require eweavertech/php-env-validator --dev
+composer require e-weaver/php-env-validator --dev
 ```
 
 ## Usage

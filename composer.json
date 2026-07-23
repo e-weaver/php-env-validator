@@ -1,5 +1,5 @@
 {
-    "name": "eweavertech/php-env-validator",
+    "name": "e-weaver/php-env-validator",
     "description": "A lightweight CLI tool to validate and synchronize your .env files with .env.example",
     "type": "library",
     "license": "MIT",
