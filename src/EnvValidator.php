@@ -63,19 +63,29 @@ class EnvValidator
 
         echo "\033[33mFound " . count($missingKeys) . " missing key(s) in your .env file.\033[0m\n\n";
 
-        foreach ($missingKeys as $key) {
-            echo "Enter value for \033[36m{$key}\033[0m (leave blank to skip): ";
-            $value = trim(fgets(STDIN));
+        echo "Would you like to append all missing keys without values, or be prompted one-by-one? (all/one): ";
+        $mode = trim(fgets(STDIN));
+        
+        if (strtolower($mode) === 'all') {
+            foreach ($missingKeys as $key) {
+                file_put_contents($this->envFile, "\n{$key}=", FILE_APPEND);
+            }
+            echo "\033[32mAppended all missing keys without values.\033[0m\n";
+        } else {
+            foreach ($missingKeys as $key) {
+                echo "Enter value for \033[36m{$key}\033[0m (leave blank to skip): ";
+                $value = trim(fgets(STDIN));
 
-            if ($value !== '') {
-                // If value has spaces, wrap in quotes
-                if (strpos($value, ' ') !== false) {
-                    $value = '"' . $value . '"';
+                if ($value !== '') {
+                    // If value has spaces, wrap in quotes
+                    if (strpos($value, ' ') !== false) {
+                        $value = '"' . $value . '"';
+                    }
+                    file_put_contents($this->envFile, "\n{$key}={$value}", FILE_APPEND);
+                    echo "\033[32mAdded {$key}\033[0m\n";
+                } else {
+                    echo "\033[33mSkipped {$key}\033[0m\n";
                 }
-                file_put_contents($this->envFile, "\n{$key}={$value}", FILE_APPEND);
-                echo "\033[32mAdded {$key}\033[0m\n";
-            } else {
-                echo "\033[33mSkipped {$key}\033[0m\n";
             }
         }
 
